@@ -26,4 +26,6 @@ void print();
   post: stored strings printed, one string per line
 */
 
+char * get(int i);
+
 #endif

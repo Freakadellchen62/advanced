@@ -44,6 +44,11 @@ void delete(char * str){
   }
 }
 
+char * get(int i){
+  if(i <= size) return dataStore[i-1];
+  else return NULL;
+}
+
 void print(){
   for(int i = 0; i < size; i++){
       if(dataStore[i] != NULL){
