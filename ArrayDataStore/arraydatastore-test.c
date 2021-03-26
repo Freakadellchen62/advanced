@@ -7,11 +7,29 @@
 
 #line 1 "arraydatastore-test.check"
 #include "arraydatastore.h"
-START_TEST(api_test)
+#include "string.h"
+START_TEST(ads_test_insert)
 {
-#line 3
-      ck_assert_int_eq(1,1); //stupid examples of course
-      ck_assert_int_str_eq("hello", "hallo");
+#line 4
+  init(10);
+  insert("El1");
+  insert("El2");
+  insert("El3");
+  ck_assert_str_eq(get(1), "El1");
+  ck_assert_str_eq(get(2), "El2");
+  ck_assert_str_eq(get(3), "El3");
+  ck_assert(get(4) == NULL);
+}
+END_TEST
+
+START_TEST(ads_test_delete)
+{
+#line 13
+  init(10);
+  insert("El1");
+  ck_assert_str_eq(get(1), "El1");
+  delete("El1");
+  ck_assert(get(1) == NULL);
 }
 END_TEST
 
@@ -23,7 +41,8 @@ int main(void)
     int nf;
 
     suite_add_tcase(s1, tc1_1);
-    tcase_add_test(tc1_1, api_test);
+    tcase_add_test(tc1_1, ads_test_insert);
+    tcase_add_test(tc1_1, ads_test_delete);
 
     srunner_run_all(sr, CK_ENV);
     nf = srunner_ntests_failed(sr);

@@ -1,4 +1,17 @@
 #include "arraydatastore.h"
-#test api_test
-      ck_assert_int_eq(1,1); //stupid examples of course
-      ck_assert_int_str_eq("hello", "hallo");
+#include "string.h"
+#test ads_test_insert
+  init(10);
+  insert("El1");
+  insert("El2");
+  insert("El3");
+  ck_assert_str_eq(get(1), "El1");
+  ck_assert_str_eq(get(2), "El2");
+  ck_assert_str_eq(get(3), "El3");
+  ck_assert(get(4) == NULL);
+#test ads_test_delete
+  init(10);
+  insert("El1");
+  ck_assert_str_eq(get(1), "El1");
+  delete("El1");
+  ck_assert(get(1) == NULL);
